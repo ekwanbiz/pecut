@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8"><meta name="color-scheme" content="dark">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Perjalanan · PECUT</title>
+<style>
+:root{--bg:#160A0B;--sf:#221113;--sf2:#2E1619;--sf3:#1A0C0E;--bd:#44201F;--bd2:#5A2A2A;--tx:#FFF0EE;--mu:#D9A9A4;--mu2:#A6716C;--c1:#FF4D5A;--c2:#FFB020;--c3:#4FD1FF;--gold:#FFD166;--ok:#3DDC84;--bad:#FF6B7A;
+ font-family:Inter,"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--tx);background:var(--bg)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);background-image:linear-gradient(#ffffff07 1px,transparent 1px),linear-gradient(90deg,#ffffff07 1px,transparent 1px);background-size:32px 32px}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.wrap{flex:1;min-height:0;display:grid;grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr) auto auto;gap:10px;padding:12px 12px calc(12px + env(safe-area-inset-bottom));max-width:1200px;width:100%;margin:0 auto}
+.modes{display:flex;gap:6px;background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:5px}
+.modes button{flex:1;border:0;background:none;color:var(--mu);font-weight:800;font-size:15px;padding:11px 6px;border-radius:12px}
+.modes button.on{background:var(--c1);color:#2a0508}
+.stage{min-height:0;background:var(--sf3);border:1px solid var(--bd);border-radius:18px;overflow:hidden;position:relative}
+.stage svg{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;user-select:none;-webkit-user-select:none}
+.info{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:11px 14px;line-height:1.5;font-size:15px}
+.info b.t{display:block;font-size:18px;color:var(--c1);margin-bottom:2px}
+.info .f{font-weight:800;font-size:17px}.info .f b{color:var(--c2)}
+.info .tip{color:var(--mu);font-size:13px;margin-top:3px}
+.info .ok{color:var(--ok)}.info .no{color:var(--bad)}
+.ctrl{display:flex;flex-direction:column;gap:8px}
+.line{display:flex;gap:8px;align-items:center}
+.line label{font-weight:800;color:var(--mu);font-size:14px;white-space:nowrap;min-width:64px}
+.line input[type=range]{flex:1;accent-color:var(--c1);height:28px}
+.seg{display:flex;gap:6px;flex:1}
+.seg button{flex:1;background:var(--sf);border:2px solid var(--bd2);border-radius:12px;padding:10px 2px;font-weight:800;font-size:14.5px}
+.seg button.on{background:var(--c1);border-color:var(--c1);color:#2a0508}
+.btns{display:flex;gap:8px}
+.big{flex:1;background:var(--c2);border:0;color:#2a1a00;border-radius:13px;padding:13px 6px;font-weight:900;font-size:16px}
+.big.alt{flex:.6;background:var(--sf);border:2px solid var(--bd2);color:var(--tx)}
+.big.ok{background:var(--ok);color:#06240f}.big.no{background:var(--bad);color:#2a0609}
+.big:disabled{opacity:.45}
+.nextb{margin-top:6px;background:var(--c1);border:0;color:#2a0508;border-radius:11px;padding:8px 16px;font-weight:900}
+@media(min-width:900px) and (min-aspect-ratio:4/3){
+ .wrap{grid-template-columns:minmax(0,1.45fr) minmax(330px,1fr);grid-template-rows:auto minmax(0,1fr) auto;grid-template-areas:"m m" "s i" "s c"}
+ .modes{grid-area:m}.stage{grid-area:s}.info{grid-area:i;align-self:start;font-size:16px;padding:18px}.ctrl{grid-area:c;align-self:end}
+ .info b.t{font-size:22px}.info .f{font-size:19px}
+}
+@media(max-height:620px){.wrap{gap:7px;padding-top:8px}.modes button{padding:8px 4px;font-size:14px}.info{padding:8px 11px;font-size:13.5px}.info .f{font-size:15px}.info b.t{font-size:16px}.big{padding:10px 4px}.seg button{padding:7px 2px}}
+.c1{color:var(--c1)}.c2{color:var(--c2)}.c3{color:var(--c3)}.ca{color:var(--c1);font-weight:900}.cb{color:var(--c3);font-weight:900}.info .f small{color:var(--mu);font-weight:700}.info .f2{font-weight:700;font-size:14.5px}.info .f2 b{color:var(--c2)}.tip2{color:var(--mu);font-size:13px;text-align:center}.big.sm{flex:.35}
+.line label{min-width:80px}.seg button{font-size:13.5px}@media(max-height:700px){.seg button{padding:7px 2px}.big{padding:10px 4px}.info .f2{font-size:13px}}
+</style>
+<style id="nozoom">html{touch-action:manipulation;-webkit-text-size-adjust:100%;text-size-adjust:100%}</style>
+</head>
+<body>
+<div id="backAL" style="padding:calc(14px + env(safe-area-inset-top)) 12px 0;position:relative;z-index:50;max-width:1200px;width:100%;margin:0 auto"><a href="../index.html#/simulasi" style="display:inline-flex;align-items:center;gap:10px;background:#4FD1FF;color:#04263a;border-radius:14px;padding:12px 22px;font:900 17px Inter,system-ui,sans-serif;text-decoration:none;box-shadow:0 8px 22px #4FD1FF44">&#8592; Kembali ke PECUT</a></div><script>if(window.top!==window.self)document.getElementById("backAL").style.display="none"</script>
+<div class="wrap">
+ <div class="modes" role="tablist" id="ssel"></div>
+ <div class="stage" id="stage"><svg id="svg" aria-label="Peta perjalanan"></svg></div>
+ <div class="info" id="info" aria-live="polite"></div>
+ <div class="ctrl">
+  <div class="line"><label>Rehat di B</label><div class="seg" id="rsel"></div></div>
+  <div class="line"><label>Unit</label><div class="seg" id="usel"></div></div>
+  <div class="btns"><button class="big" id="go">▶ Mula perjalanan</button><button class="big alt sm" id="rs" aria-label="Semula">↺</button></div>
+ </div>
+</div>
+<script>
+'use strict';
+const svg=document.getElementById('svg'),stage=document.getElementById('stage'),info=document.getElementById('info'),go=document.getElementById('go');
+const SC=[{n:'🚗 Kereta',d1:120,t1:2,d2:90,t2:1.5},{n:'🚌 Bas',d1:100,t1:2,d2:60,t2:1},{n:'🚲 Basikal',d1:30,t1:2,d2:15,t2:1}];
+const RS=[[0,'Tiada'],[.5,'30 min'],[1,'1 jam']],US=['km/j','m/s','m/min'];
+let si=0,rest=.5,ui=0,t=0,anim=null,done=false;
+const T=(x,y,s,c='#FFF0EE',z=12,w=800,a='middle')=>`<text x="${x}" y="${y}" fill="${c}" font-size="${z}" font-weight="${w}" text-anchor="${a}" dominant-baseline="middle" font-family="Arial" paint-order="stroke" stroke="#1A0C0E" stroke-width="4">${s}</text>`;
+const r2=v=>Math.round(v*100)/100;
+const hm=h=>{const H=Math.floor(h+1e-9),m=Math.round((h-H)*60);return m===60?(H+1)+' j':(H?H+' j':'')+(m?(H?' ':'')+m+' min':(H?'':'0 j'))};
+function pos(tt){const S=SC[si];if(tt<=S.t1)return S.d1*tt/S.t1;if(tt<=S.t1+rest)return S.d1;return Math.min(S.d1+S.d2,S.d1+S.d2*(tt-S.t1-rest)/S.t2)}
+const TT=()=>{const S=SC[si];return S.t1+rest+S.t2};
+function draw(){const S=SC[si],w=stage.clientWidth||300,h=stage.clientHeight||300;svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
+ const D=S.d1+S.d2,x0=34,x1=w-34,X=d=>x0+(x1-x0)*d/D,y=h*.52;let g='';
+ g+=`<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="#5A2A2A" stroke-width="16" stroke-linecap="round"/><line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="#FFF0EE55" stroke-width="2" stroke-dasharray="10 9"/>`;
+ const xc=X(pos(t));g+=`<line x1="${x0}" y1="${y}" x2="${xc}" y2="${y}" stroke="#FF4D5A" stroke-width="6" stroke-linecap="round"/>`;
+ [[0,'A'],[S.d1,'B'],[D,'C']].forEach(([d,l])=>{g+=`<circle cx="${X(d)}" cy="${y}" r="13" fill="#2E1619" stroke="#FFB020" stroke-width="3"/>`+T(X(d),y+1,l,'#FFB020',13,900)});
+ g+=T((X(0)+X(S.d1))/2,y+34,S.d1+' km','#FFF0EE',14,900)+T((X(0)+X(S.d1))/2,y+52,hm(S.t1),'#D9A9A4',12,700);
+ g+=T((X(S.d1)+X(D))/2,y+34,S.d2+' km','#FFF0EE',14,900)+T((X(S.d1)+X(D))/2,y+52,hm(S.t2),'#D9A9A4',12,700);
+ if(rest)g+=T(X(S.d1),y-30,'☕ rehat '+hm(rest),'#4FD1FF',12,800);
+ const resting=t>S.t1&&t<S.t1+rest;
+ g+=`<text x="${xc}" y="${y-(rest&&Math.abs(xc-X(S.d1))<30?52:20)}" font-size="26" text-anchor="middle" dominant-baseline="middle">${S.n.split(' ')[0]}</text>`;
+ const by=Math.max(22,y-96);g+=`<rect x="${w/2-120}" y="${by-16}" width="110" height="32" rx="10" fill="#2E1619" stroke="#5A2A2A"/><rect x="${w/2+10}" y="${by-16}" width="110" height="32" rx="10" fill="#2E1619" stroke="#5A2A2A"/>`;
+ g+=T(w/2-65,by,'⏱ '+hm(t),'#FFB020',14,900)+T(w/2+65,by,'📍 '+r2(pos(t))+' km','#FF4D5A',14,900);
+ if(resting)g+=T(w/2,by+30,'Sedang berehat — jarak tidak berubah, masa terus berjalan','#4FD1FF',11,700);
+ svg.innerHTML=g}
+function conv(v){if(ui===0)return'';if(ui===1)return`<div class="f2">${r2(v)} km/j = ${r2(v)} × 1000 m ÷ 3600 s = <b>${r2(v*1000/3600)} m/s</b></div>`;return`<div class="f2">${r2(v)} km/j = ${r2(v)} × 1000 m ÷ 60 min = <b>${r2(v*1000/60)} m/min</b></div>`}
+function showInfo(){const S=SC[si];if(!done){info.innerHTML=`<div class="f">Laju purata = <span class="c1">jumlah jarak</span> ÷ <span class="c2">jumlah masa</span></div><div class="tip">Tekan <b>Mula</b>. Masa rehat juga dikira dalam jumlah masa.</div>`;return}
+ const D=S.d1+S.d2,Tm=TT(),v=D/Tm;
+ info.innerHTML=`<div class="f2">Jumlah jarak = ${S.d1} + ${S.d2} = <span class="c1">${D} km</span></div><div class="f2">Jumlah masa = ${S.t1} + ${rest} + ${S.t2} = <span class="c2">${Tm} j</span></div><div class="f">Laju purata = ${D} ÷ ${Tm} = <b>${r2(v)} km/j</b></div>${conv(v)}`}
+function run(){if(anim)return;t=0;done=false;const Tm=TT(),dur=4200,t0=performance.now();setBusy(true);
+ const step=now=>{const p=Math.min(1,(now-t0)/dur);t=Tm*p;draw();if(p<1)anim=requestAnimationFrame(step);else{anim=null;done=true;draw();showInfo();setBusy(false)}};anim=requestAnimationFrame(step)}
+function setBusy(b){document.querySelectorAll('button').forEach(x=>x.disabled=b)}
+function reset(){if(anim)return;t=0;done=false;draw();showInfo()}
+function seg(id,items,cur,fn){const el=document.getElementById(id);el.innerHTML=items.map((it,i)=>`<button data-i="${i}" class="${i===cur?'on':''}">${it}</button>`).join('');el.querySelectorAll('button').forEach(b=>b.onclick=()=>{el.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));fn(+b.dataset.i)})}
+seg('ssel',SC.map(s=>s.n),0,i=>{si=i;reset()});
+seg('rsel',RS.map(r=>r[1]),1,i=>{rest=RS[i][0];reset()});
+seg('usel',US,0,i=>{ui=i;if(done)showInfo()});
+go.onclick=run;document.getElementById('rs').onclick=reset;
+new ResizeObserver(()=>draw()).observe(stage);draw();showInfo();
+</script>
+<script id="nozoomjs">(function(){var p=function(e){e.preventDefault()};['gesturestart','gesturechange','gestureend'].forEach(function(t){document.addEventListener(t,p,{passive:false})});document.addEventListener('touchmove',function(e){if(e.touches&&e.touches.length>1)e.preventDefault()},{passive:false});document.addEventListener('wheel',function(e){if(e.ctrlKey)e.preventDefault()},{passive:false});document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&['+','-','=','0','_'].indexOf(e.key)>=0)e.preventDefault()});})();</script>
+</body>
+</html>

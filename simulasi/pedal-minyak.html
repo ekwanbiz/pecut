@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ms">
+<head>
+<meta charset="utf-8"><meta name="color-scheme" content="dark">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>Pedal Minyak · PECUT</title>
+<style>
+:root{--bg:#160A0B;--sf:#221113;--sf2:#2E1619;--sf3:#1A0C0E;--bd:#44201F;--bd2:#5A2A2A;--tx:#FFF0EE;--mu:#D9A9A4;--mu2:#A6716C;--c1:#FF4D5A;--c2:#FFB020;--c3:#4FD1FF;--gold:#FFD166;--ok:#3DDC84;--bad:#FF6B7A;
+ font-family:Inter,"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--tx);background:var(--bg)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg);background-image:linear-gradient(#ffffff07 1px,transparent 1px),linear-gradient(90deg,#ffffff07 1px,transparent 1px);background-size:32px 32px}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.wrap{flex:1;min-height:0;display:grid;grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto auto;gap:10px;padding:12px 12px calc(12px + env(safe-area-inset-bottom));max-width:1200px;width:100%;margin:0 auto}
+.modes{display:flex;gap:6px;background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:5px}
+.modes button{flex:1;border:0;background:none;color:var(--mu);font-weight:800;font-size:15px;padding:11px 6px;border-radius:12px}
+.modes button.on{background:var(--c1);color:#2a0508}
+.stage{min-height:0;background:var(--sf3);border:1px solid var(--bd);border-radius:18px;overflow:hidden;position:relative}
+.stage svg{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;user-select:none;-webkit-user-select:none}
+.info{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:11px 14px;line-height:1.5;font-size:15px}
+.info b.t{display:block;font-size:18px;color:var(--c1);margin-bottom:2px}
+.info .f{font-weight:800;font-size:17px}.info .f b{color:var(--c2)}
+.info .tip{color:var(--mu);font-size:13px;margin-top:3px}
+.info .ok{color:var(--ok)}.info .no{color:var(--bad)}
+.ctrl{display:flex;flex-direction:column;gap:8px}
+.line{display:flex;gap:8px;align-items:center}
+.line label{font-weight:800;color:var(--mu);font-size:14px;white-space:nowrap;min-width:64px}
+.line input[type=range]{flex:1;accent-color:var(--c1);height:28px}
+.seg{display:flex;gap:6px;flex:1}
+.seg button{flex:1;background:var(--sf);border:2px solid var(--bd2);border-radius:12px;padding:10px 2px;font-weight:800;font-size:14.5px}
+.seg button.on{background:var(--c1);border-color:var(--c1);color:#2a0508}
+.btns{display:flex;gap:8px}
+.big{flex:1;background:var(--c2);border:0;color:#2a1a00;border-radius:13px;padding:13px 6px;font-weight:900;font-size:16px}
+.big.alt{flex:.6;background:var(--sf);border:2px solid var(--bd2);color:var(--tx)}
+.big.ok{background:var(--ok);color:#06240f}.big.no{background:var(--bad);color:#2a0609}
+.big:disabled{opacity:.45}
+.nextb{margin-top:6px;background:var(--c1);border:0;color:#2a0508;border-radius:11px;padding:8px 16px;font-weight:900}
+@media(min-width:900px) and (min-aspect-ratio:4/3){
+ .wrap{grid-template-columns:minmax(0,1.45fr) minmax(330px,1fr);grid-template-rows:minmax(0,1fr) auto;grid-template-areas:"s i" "s c"}
+ .modes{grid-area:m}.stage{grid-area:s}.info{grid-area:i;align-self:start;font-size:16px;padding:18px}.ctrl{grid-area:c;align-self:end}
+ .info b.t{font-size:22px}.info .f{font-size:19px}
+}
+@media(max-height:620px){.wrap{gap:7px;padding-top:8px}.modes button{padding:8px 4px;font-size:14px}.info{padding:8px 11px;font-size:13.5px}.info .f{font-size:15px}.info b.t{font-size:16px}.big{padding:10px 4px}.seg button{padding:7px 2px}}
+.c1{color:var(--c1)}.c2{color:var(--c2)}.c3{color:var(--c3)}.ca{color:var(--c1);font-weight:900}.cb{color:var(--c3);font-weight:900}.info .f small{color:var(--mu);font-weight:700}.info .f2{font-weight:700;font-size:14.5px}.info .f2 b{color:var(--c2)}.tip2{color:var(--mu);font-size:13px;text-align:center}.big.sm{flex:.35}
+.hold{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;touch-action:none;font-size:18px;padding:18px 6px}.hold.down{transform:scale(.96);filter:brightness(1.2)}
+</style>
+<style id="nozoom">html{touch-action:manipulation;-webkit-text-size-adjust:100%;text-size-adjust:100%}</style>
+</head>
+<body>
+<div id="backAL" style="padding:calc(14px + env(safe-area-inset-top)) 12px 0;position:relative;z-index:50;max-width:1200px;width:100%;margin:0 auto"><a href="../index.html#/simulasi" style="display:inline-flex;align-items:center;gap:10px;background:#4FD1FF;color:#04263a;border-radius:14px;padding:12px 22px;font:900 17px Inter,system-ui,sans-serif;text-decoration:none;box-shadow:0 8px 22px #4FD1FF44">&#8592; Kembali ke PECUT</a></div><script>if(window.top!==window.self)document.getElementById("backAL").style.display="none"</script>
+<div class="wrap">
+ <div class="stage" id="stage"><svg id="svg" aria-label="Meter laju"></svg></div>
+ <div class="info" id="info" aria-live="polite"></div>
+ <div class="ctrl"><div class="btns"><button class="big hold no" id="br">⬇ Brek</button><button class="big hold ok" id="gas">⬆ Minyak</button><button class="big alt sm" id="rs" aria-label="Semula">↺</button></div><div class="tip2">Tekan dan <b>tahan</b> butang. Lepas = laju seragam.</div></div>
+</div>
+<script>
+'use strict';
+const svg=document.getElementById('svg'),stage=document.getElementById('stage'),info=document.getElementById('info');
+const VMAX=30,AG=3,AB=-4,DT=.1;
+let v=0,tt=0,pedal=0,acc=0,last=performance.now(),hist=[{t:0,v:0}],cur=null,lastSeg=null,dash=0;
+const T=(x,y,s,c='#FFF0EE',z=12,w=800,a='middle')=>`<text x="${x}" y="${y}" fill="${c}" font-size="${z}" font-weight="${w}" text-anchor="${a}" dominant-baseline="middle" font-family="Arial" paint-order="stroke" stroke="#1A0C0E" stroke-width="4">${s}</text>`;
+const f1=x=>(Math.round(x*10)/10).toFixed(1).replace('.0','').replace('-','−');
+const kind=()=>pedal>0&&v<VMAX?'pecut':pedal<0&&v>0?'brek':v>0?'seragam':'pegun';
+const LBL={pecut:['Pecutan','#3DDC84','Laju bertambah'],brek:['Nyahpecutan','#FF6B7A','Laju berkurang'],seragam:['Laju seragam','#FFB020','Pecutan = 0'],pegun:['Pegun','#D9A9A4','Laju = 0']};
+function tick(){const k=kind();if(k==='pegun'&&!pedal){if(cur){closeSeg();return true}return false}
+ if(!cur||cur.type!==k){closeSeg();cur={type:k,t0:tt,v0:v}}
+ const a=k==='pecut'?AG:k==='brek'?AB:0;v=Math.max(0,Math.min(VMAX,Math.round((v+a*DT)*10)/10));tt=Math.round((tt+DT)*10)/10;hist.push({t:tt,v});if(hist.length>400)hist.shift();dash+=v*DT;return true}
+function closeSeg(){if(cur&&tt-cur.t0>=.3&&cur.type!=='pegun'){lastSeg={type:cur.type,v0:cur.v0,v1:v,dt:Math.round((tt-cur.t0)*10)/10}}cur=null}
+function loop(now){let el=Math.min(.25,(now-last)/1000);last=now;acc+=el;let ch=false;while(acc>=DT){acc-=DT;ch=tick()||ch}draw();if(ch)showInfo();requestAnimationFrame(loop)}
+function gauge(cx,cy,R){let g='';const A0=210,A1=-30,ang=x=>(A0+(A1-A0)*x/VMAX)*Math.PI/180,P=(x,r)=>[cx+r*Math.cos(ang(x)),cy-r*Math.sin(ang(x))];
+ const [sx,sy]=P(0,R),[ex,ey]=P(VMAX,R);g+=`<path d="M${sx} ${sy}A${R} ${R} 0 1 1 ${ex} ${ey}" fill="none" stroke="#5A2A2A" stroke-width="${R*.12}" stroke-linecap="round"/>`;
+ const [vx,vy]=P(v,R);if(v>0)g+=`<path d="M${sx} ${sy}A${R} ${R} 0 ${v/VMAX*240>180?1:0} 1 ${vx} ${vy}" fill="none" stroke="#FF4D5A" stroke-width="${R*.12}" stroke-linecap="round"/>`;
+ for(let x=0;x<=VMAX;x+=5){const [a,b]=P(x,R*.78),[c,d]=P(x,R*.9);g+=`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" stroke="#D9A9A4" stroke-width="2"/>`+T(...P(x,R*.64),x,'#D9A9A4',Math.max(10,R*.11),700)}
+ const [nx,ny]=P(v,R*.82);g+=`<line x1="${cx}" y1="${cy}" x2="${nx}" y2="${ny}" stroke="#FFB020" stroke-width="${Math.max(3,R*.05)}" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="${R*.08}" fill="#FFB020"/>`;
+ g+=T(cx,cy+R*.36,f1(v),'#FFF0EE',R*.28,900)+T(cx,cy+R*.6,'m/s','#D9A9A4',R*.12,700);return g}
+function graph(x,y,w,h){const span=20,t1=Math.max(span,tt),t0=t1-span,X=t=>x+(t-t0)/span*w,Y=vv=>y+h-vv/VMAX*h;let g=`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="8" fill="#221113"/>`;
+ for(let k=0;k<=VMAX;k+=10)g+=`<line x1="${x}" y1="${Y(k)}" x2="${x+w}" y2="${Y(k)}" stroke="#ffffff10"/>`+T(x-10,Y(k),k,'#A6716C',10,700);
+ const pts=hist.filter(p=>p.t>=t0).map(p=>X(p.t).toFixed(1)+','+Y(p.v).toFixed(1)).join(' ');g+=`<polyline points="${pts}" fill="none" stroke="#FF4D5A" stroke-width="3"/>`;
+ return g+T(x+w/2,y+h+12,'Graf laju–masa (20 s terakhir)','#A6716C',10,700)}
+function road(x,y,w){let g=`<rect x="${x}" y="${y-14}" width="${w}" height="28" rx="6" fill="#5A2A2A"/>`;const off=(dash*8)%40;for(let xx=x-off+40;xx+20<=x+w-4;xx+=40)g+=`<rect x="${xx}" y="${y-2}" width="20" height="4" fill="#FFF0EE66"/>`;
+ return g+`<g transform="translate(${x+w/2} ${y-6})"><rect x="-26" y="-12" width="44" height="18" rx="7" fill="#FF4D5A"/><path d="M-16 -12l6 -9h14l8 9z" fill="#FF4D5A"/><circle cx="-14" cy="7" r="6" fill="#111"/><circle cx="8" cy="7" r="6" fill="#111"/></g>`}
+function draw(){const w=stage.clientWidth||300,h=stage.clientHeight||300;svg.setAttribute('viewBox',`0 0 ${w} ${h}`);const port=w/h<1.15;let g='';
+ if(port){const R=Math.min(w*.36,h*.24);g+=gauge(w/2,R+18,R)+road(16,R*1.95+22,w-32)+graph(36,R*1.95+52,w-52,Math.max(60,h-(R*1.95+52)-22))}
+ else{const R=Math.min(w*.2,h*.36);g+=gauge(w*.27,R+20,R)+road(20,R*1.9+30,w*.5-40)+graph(w*.56,20,w*.42,h-50)}
+ const k=kind(),L=LBL[k];g+=`<rect x="10" y="10" width="${L[0].length*9+26}" height="28" rx="14" fill="${L[1]}22" stroke="${L[1]}"/>`+T(23+L[0].length*4.5,24,L[0],L[1],13,900);
+ svg.innerHTML=g}
+function showInfo(){if(!lastSeg){info.innerHTML=`<div class="f">Pecutan = (laju akhir − laju awal) ÷ masa</div><div class="tip">Tahan <b>Minyak</b> beberapa saat, kemudian lepas. Pengiraan pecutan akan muncul.</div>`;return}
+ const s=lastSeg,a=(s.v1-s.v0)/s.dt,L=LBL[s.type];
+ const tail=s.type==='brek'?` → <b style="color:#FF6B7A">nyahpecutan ${f1(-a)} m/s²</b>`:s.type==='seragam'?' → <b>laju seragam</b>':'';
+ info.innerHTML=`<b class="t" style="color:${L[1]}">${L[0]} · ${L[2]}</b><div class="f">= (${f1(s.v1)} − ${f1(s.v0)}) ÷ ${f1(s.dt)} = <b>${f1(a)} m/s²</b>${tail}</div>`}
+function hold(id,val){const b=document.getElementById(id);const on=e=>{e.preventDefault();pedal=val;b.classList.add('down');try{b.setPointerCapture(e.pointerId)}catch(_){}};const off=()=>{if(pedal===val){pedal=0;closeSegSoon()}b.classList.remove('down')};
+ b.addEventListener('pointerdown',on);b.addEventListener('pointerup',off);b.addEventListener('pointercancel',off);b.addEventListener('lostpointercapture',off);b.addEventListener('contextmenu',e=>e.preventDefault())}
+function closeSegSoon(){/* segmen ditutup pada tick seterusnya apabila jenis berubah */setTimeout(showInfo,120)}
+hold('gas',1);hold('br',-1);
+document.addEventListener('keydown',e=>{if(e.repeat)return;if(e.key==='ArrowUp')pedal=1;if(e.key==='ArrowDown')pedal=-1});
+document.addEventListener('keyup',e=>{if(e.key==='ArrowUp'&&pedal===1||e.key==='ArrowDown'&&pedal===-1){pedal=0;closeSegSoon()}});
+document.getElementById('rs').onclick=()=>{v=0;tt=0;hist=[{t:0,v:0}];cur=null;lastSeg=null;pedal=0;showInfo()};
+new ResizeObserver(()=>draw()).observe(stage);showInfo();requestAnimationFrame(loop);
+</script>
+<script id="nozoomjs">(function(){var p=function(e){e.preventDefault()};['gesturestart','gesturechange','gestureend'].forEach(function(t){document.addEventListener(t,p,{passive:false})});document.addEventListener('touchmove',function(e){if(e.touches&&e.touches.length>1)e.preventDefault()},{passive:false});document.addEventListener('wheel',function(e){if(e.ctrlKey)e.preventDefault()},{passive:false});document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&['+','-','=','0','_'].indexOf(e.key)>=0)e.preventDefault()});})();</script>
+</body>
+</html>
